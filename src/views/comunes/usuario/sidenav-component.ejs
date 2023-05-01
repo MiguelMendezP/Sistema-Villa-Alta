@@ -1,0 +1,35 @@
+<ul id="slide-out" class="sidenav sidenav-fixed blue">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="/assets/img/fondo.jpg">
+            </div>
+            <a><i class="large material-icons white-text">person</i></a>
+            <a><span class="white-text name">
+                    <%= user.nombre %>
+                </span></a>
+            <a href="#email"><span id="correoUsuario" class="white-text email">
+                    <%= user.correo %>
+                </span></a>
+
+        </div>
+    </li>
+    <li class="no-padding">
+        <li><a class="subheader white-text">Opciones</a></li>
+        <li><a <a class="white-text" href="/busqueda">Comprar <i class=" material-icons white-text">directions_bus</i></a></li>
+        <li><a <a class="white-text" href="/mis-boletos/view">Mis Boletos <i class=" material-icons white-text">bookmark</i></a></li>
+    </li>
+    <style>
+		#elemento {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			padding-bottom: 70px;
+		}
+	</style>
+    <li id="elemento">
+        <a class="white-text" href="/">Cerrar Sesión</a>
+    </li>
+
+</ul>

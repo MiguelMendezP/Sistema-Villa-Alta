@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/register.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Register</title>
+</head>
+
+<body>
+
+    <div class="form">
+        <div class="form-panel one">
+            <div class="form-header">
+                <h1>Crear Cuenta</h1>
+            </div>
+            <div class="form-content">
+                <form id="formRegister" action="" method="post">
+
+                    <div class="input-field col s12" id="grupo__nombre">
+                        <input id="nombre" type="text" name="nombre" required="required" />
+                        <label for="nombre">Nombre</label>
+                        <p class="input-error" id="input-error">El nombre no puede tener caracteres</p>
+                    </div>
+
+                    <div class="input-field col s12" id="grupo__correo">
+                        <input id="correo" type="email" name="correo" required="required" />
+                        <label for="correo">Correo</label>
+                        <p class="input-error" id="input-error">Esto no es un correo electronico</p>
+                    </div>
+
+                    <div class="input-field col s12" id="grupo__contrasenia">
+                        <input id="contrasenia" type="password" name="contrasenia" required="required" />
+                        <label for="contrasenia">Contraseña</label>
+                        <p class="input-error" id="input-error">Utiliza 8 caracteres como mínimo con una combinación de letras, números y símbolos</p>
+                    </div>
+
+                    <div class="input-field col s12" id="grupo__contrasenia2">
+                        <input id="contrasenia2" type="password" name="contrasenia2" required="required" />
+                        <label for="contrasenia2">Confirmar Contraseña</label>
+                        <p class="input-error" id="input-error">Ingresa la misma contraseña</p>
+                    </div>
+                    <div class="form-group">
+                        <button id="btnRegistrar" type="submit">Registrar</button>
+                    </div>
+                    <div class="mensaje" id="mensaje">
+                        <p><b>Error:</b> Rellena el formulario correctamente. </p>
+                    </div>
+
+                    <div class="mensaje-exito" id="mensaje-exito">
+                        <p><b>Felicidades:</b> Tu cuenta se ha creado, Inicia Secion... </p>
+                    </div>
+
+                    <div class="mensaje-existe" id="mensaje-existe">
+                        <p><b>Error:</b> El correo que tratas de ingresar ya existe </p>
+                    </div>
+
+                    <div>
+                        <h6><a href="/">Cancelar</a></h6>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/assets/js/login/register.js"></script>
+    <script src="/assets/js/http.js"></script>
+
+</body>
+
+</html>

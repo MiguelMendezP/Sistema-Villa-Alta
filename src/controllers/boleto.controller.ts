@@ -8,7 +8,7 @@ export async function indexViewBoleto(req: Request, res: Response) {
 export async function getBoleto(req: Request, res: Response) {
     const { query: where } = req
     const boleto = await BoletoModel.findAll({
-        attributes: ["idBoleto", "idUsuario", "idSalida","noAsiento"],
+        attributes: ["idBoleto", "idUsuario", "idSalida","idPrecio","noAsiento"],
         raw: true,
         where
     });

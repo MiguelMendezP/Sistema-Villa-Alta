@@ -1,10 +1,25 @@
+.dividirPantalla{
+    display: flex;
+    height: 650px;
+    padding-top: 5%;
+}
+
+.datosViaje-pago{
+    position: relative;
+    top: 20px;
+    left: 60px;
+    width: 500px;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif
 }
 h5{
+    font-size: 36px;
     position: relative;
     top: 20px;
     left: 30px;
+    padding-bottom: 50px;
 }
 
 
@@ -14,7 +29,7 @@ h5{
     display: flex;
     background: #f8f9fb;
     border-radius: 7px;
-    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    box-shadow: 0 5px 10px 5px rgb(0 0 0 / 30%);
 
     position: relative;
     top: 20px;
@@ -85,13 +100,4 @@ h5{
         background-color: #f8f9fb;
     
     
-}
-
-.dividirPantalla{
-    display: flex;
-}
-.datosViaje-pago{
-    position: relative;
-    top: 20px;
-    left: 60px;
 }

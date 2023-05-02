@@ -2,15 +2,18 @@ const asientos = (() => {
     const BASE_URL_BOLETO = "/mis-boletos";
     const $containerAsientos = document.getElementById("containerAsientos");
     const $labels = document.querySelectorAll("#formAsientos label");
+    const $btnFinalizarPago = document.getElementById("btnFinalizarPago");
 
     $btnProcederPagarn = document.getElementById("btnProcederPagar");
     $btnProcederPagarn.addEventListener('click', () => {
         if (arrayAsientosSeleccionado.length == $iconValor.innerHTML) {
             asientos.setVisible(false);
             pago.setVisible(true);
+
+            $btnFinalizarPago.style.backgroundColor = '#808080';
+            $btnFinalizarPago.disabled = true;
         }
     });
-
 
 
     const validarSeleccionado = (e) => {
@@ -73,7 +76,6 @@ const asientos = (() => {
             $img.setAttribute("src", "/assets/img/ocupado.png");
             }
         }  
-        console.log(arrayAsientosOcupa);
     }
 
 

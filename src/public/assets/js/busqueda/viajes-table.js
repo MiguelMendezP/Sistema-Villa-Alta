@@ -13,6 +13,7 @@ const viajes = (() => {
     const $btnProcederPagarn = document.getElementById("btnProcederPagar");
     var precioBoleto = 0;
     var puntoDestino = "";
+    var IdPrecio = 0;
 
     const _getData = async () => {
         viajes.setVisible(true);
@@ -23,8 +24,8 @@ const viajes = (() => {
         let mapHora = response.map((response) => response.hora);
         let mapFecha = response.map((response) => response.fecha);
         let mapTerminal_salida = response.map((response) => response.terminal_salida);
-        let mapTerminal_destino = response.map((response) => response.terminal_destino);
 
+        let mapIDPrecio = responsePrecio.map((responsePrecio) => responsePrecio.idPrecio);
         let mapPrecioDestino = responsePrecio.map((responsePrecio) => responsePrecio.destino);
         let mapPrecioOaxaca = responsePrecio.map((responsePrecio) => responsePrecio.precioOaxaca);
         let mapPrecioVilla = responsePrecio.map((responsePrecio) => responsePrecio.precioVilla);
@@ -48,6 +49,7 @@ const viajes = (() => {
                     };
                     precioBoleto = mapPrecioOaxaca[mapPrecioDestino.indexOf($terminal_destino)];
                     puntoDestino = mapPrecioDestino[mapPrecioDestino.indexOf($terminal_destino)];
+                    IdPrecio = mapIDPrecio[mapPrecioDestino.indexOf($terminal_destino)];
                     const $row = _createRow(salidasTable, "idSalida");
                     $bodyTable.appendChild($row);
 
@@ -58,12 +60,10 @@ const viajes = (() => {
                         "terminal_salida": mapTerminal_salida[i],
                         "terminal_destino": mapPrecioDestino[mapPrecioDestino.indexOf($terminal_destino)],
                         "precio": mapPrecioVilla[mapPrecioDestino.indexOf($terminal_destino)]
-                        
                     };
-                    console.log(mapPrecioDestino.indexOf($terminal_destino));
-                    console.log(responsePrecio);
                     precioBoleto = mapPrecioVilla[mapPrecioDestino.indexOf($terminal_destino)];
                     puntoDestino = mapPrecioDestino[mapPrecioDestino.indexOf($terminal_destino)];
+                    IdPrecio = mapIDPrecio[mapPrecioDestino.indexOf($terminal_destino)];
                     const $row = _createRow(salidasTable, "idSalida");
                     $bodyTable.appendChild($row);
                 }
@@ -134,6 +134,11 @@ const viajes = (() => {
         return dameIdSalida
     }
 
+    const _dameIdPrecio = () => {
+
+        return IdPrecio
+    }
+
 
     const _actionButton = async (event) => {
         const $btn = event.target;
@@ -184,7 +189,8 @@ const viajes = (() => {
         },
         setVisible: _setVisible,
         mandarArray: _mandarArray,
-        dameIdSalida: _dameIdSalida
+        dameIdSalida: _dameIdSalida,
+        dameIdPrecio: _dameIdPrecio
     };
 })();
 

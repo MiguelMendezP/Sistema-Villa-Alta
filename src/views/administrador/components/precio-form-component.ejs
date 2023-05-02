@@ -1,180 +1,34 @@
-<div id="containerForm" class="card mx-basic my-basic">
-    <form id="formPrecio" action="/admin/precio" method="post" enctype="multipart/form-data">
+<div id="containerForm" class="card mx-basic my-basic hide">
+    <form id="formPrecio" action="/admin/salida" method="post" enctype="multipart/form-data">
         <div class="row">
-            <div class="input-field col s2">
-                <label>Origen Oaxaca</label>
+            <div class="input-field col s3">
+                <label>Punto de Parada</label>
             </div>
-            <div class="input-field col s1">
-                <label>Precio</label>
+            <div class="input-field col s3">
+                <label>Precio desde Oaxaca</label>
             </div>
-            <div class="input-field col s2">
-                <label>Origen Villa Alta</label>
-            </div>
-            <div class="input-field col s1">
-                <label>Precio</label>
+            <div class="input-field col s3">
+                <label>Precio desde Villa</label>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_2" for="ciudadTerminal">Mitla</label>
+        <div class="row">   
+            <div class="input-field col s3">
+                <input id="parada" type="text"></input>
+            </div>   
+            <div class="input-field col s3">
+                <input id="precioOaxaca" type="text"></input>
             </div>
-            <div class="input-field col s1">
-                <input id="precio_2" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Yaate</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_11" name="ciudad" type="text" class="validate">
+            <div class="input-field col s3">
+                <input id="precioVilla" type="text"></input>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_3" for="ciudadTerminal">Ayutla</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_3" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">San Andres</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_10" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_4" for="ciudadTerminal">Tamazulapam</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_4" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Desviación de toton</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_9" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_5" for="ciudadTerminal">Tlahui</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_5" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Metepec</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_8" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_6" for="ciudadTerminal">Yacochi</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_6" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Yacochi</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_7" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_7" for="ciudadTerminal">Metepec</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_7" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Tlahui</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_6" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_8" for="ciudadTerminal">Desviación de toton</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_8" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Tamazulapam</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_5" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_9" for="ciudadTerminal">San Andres</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_9" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Ayutla</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_4" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_10" for="ciudadTerminal">Yaate</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_10" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Mitla</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_3" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_11" for="ciudadTerminal">Lachiroaj</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_11" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Tlacolula </label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_2" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s2">
-                <label id="parada_12" for="ciudadTerminal">Villa Alta</label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio_12" name="ciudad" type="text" class="validate">
-            </div>
-            <div class="input-field col s2">
-                <label for="ciudadTerminal">Oaxaca </label>
-            </div>
-            <div class="input-field col s1">
-                <input id="precio2_1" name="ciudad" type="text" class="validate">
-            </div>
-        </div>
-
     </form>
     <div class="row">
         <div class="col s1 offset-s10">
-            <button type="submit" id="btnGuardar"
-                class="waves-effect waves-light btn my-basic mx-basic blue">Guardar</button>
+            <button type="submit" id="btnGuardar" class="waves-effect waves-light btn my-basic mx-basic blue">Registrar</button>
+        </div>
+        <div class="col s1 offset-s10">
+            <button id="btnCancelar" class="waves-effect waves-light btn my-basic mx-basic red">Cancelar</button>
         </div>
     </div>
 </div>

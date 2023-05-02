@@ -2,7 +2,6 @@ const formSalida = (() => {
   const $containerForm = document.getElementById("containerForm");
   const $form = document.getElementById("formSalida");
   const BASE_URL = "/admin/salida";
-  const BASE_URL_TERMINAL = "/admin/terminal";
   const $ciudadOrigen = document.getElementById("ciudadOrigen");
   const $ciudadDestino = document.getElementById("ciudadDestino");
   //

@@ -2,16 +2,40 @@ const pago = (() => {
     const $containerPago = document.getElementById("containerPago");
     const $numPasajeros = document.getElementById("iconValor");
     const $correoUsuario = document.getElementById("correoUsuario");
-    const $inputCorreo = document.getElementById("inputCorreo");
-    const $inputTelefono = document.getElementById("inputTelefono");
-    const $inputConfirmCorreo = document.getElementById("inputConfirmCorreo");
     const BASE_URL_PASAJERO = "/pasajero";
     const BASE_URL_USUARIO = "/admin/usuario";
     const BASE_URL_BOLETO = "/mis-boletos";
 
     const $btnFinalizarPago = document.getElementById("btnFinalizarPago");
     $btnFinalizarPago.addEventListener("click", () => {
-        crearBoleto();
+        let crear = true;
+        for (let i = 1; i <= iconValor.innerHTML; i++) {
+            var inputNombre = document.getElementById("inputNombre0"+i);
+            if(inputNombre.value == ""){
+                M.toast({ html: 'Faltan Nombres de Pasajeros' })
+                crear = false;
+                break;
+            }
+        }
+        if(crear == true){
+            crearBoleto();
+        }
+        
+        
+    });
+
+    var inputNombre01 = document.getElementById("inputNombre01");
+    inputNombre01.addEventListener("input", function () {
+
+        var expReg = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+        if (expReg.test(inputNombre01.value)) {
+            $btnFinalizarPago.style.backgroundColor = '#0084ff';
+            $btnFinalizarPago.disabled = false;
+        } else {
+            $btnFinalizarPago.style.backgroundColor = '#808080';
+            $btnFinalizarPago.disabled = true;
+        }
+
     });
 
     var arrayAsientosSeleccionado = asientos.arrayAsientosSeleccionado;
@@ -20,15 +44,18 @@ const pago = (() => {
         let mapUsuarioCorreos = responseUsuario.map((responseUsuario) => responseUsuario.correo);
         let posidUsuario = mapUsuarioCorreos.indexOf($correoUsuario.innerHTML.trim());
         let idUsuario = responseUsuario[posidUsuario].idUsuario;
-        
+
 
         crearPasajeros(idUsuario);
         for (let j = 0; j < iconValor.innerHTML; j++) {
             var formData = new FormData();
             formData.append("idUsuario", idUsuario);
             formData.append("idSalida", viajes.dameIdSalida());
+            formData.append("idPrecio", viajes.dameIdPrecio());
             formData.append("noAsiento", arrayAsientosSeleccionado[j].substring(5, 7));
+
             await http.post({ url: BASE_URL_BOLETO, body: formData });
+
             pago.setVisible(false);
             pagado.setVisible(true);
         }
@@ -41,7 +68,6 @@ const pago = (() => {
             formData.append("idUsuario", idUsuario);
             formData.append("nombre", document.getElementById("inputNombre0" + (i + 1)).value);
             formData.append("apellido", document.getElementById("inputApellido0" + (i + 1)).value);
-            formData.append("telefono", $inputTelefono.value);
             await http.post({ url: BASE_URL_PASAJERO, body: formData });
         }
     }

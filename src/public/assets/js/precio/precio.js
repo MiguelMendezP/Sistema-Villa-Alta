@@ -1,79 +1,79 @@
-const formPrecio = (() => {
-  const $form = document.getElementById("formPrecio");
+const precio = (() => {
+  const $bodyTable = document.getElementById("data");
   const BASE_URL = "/admin/precio";
+  const $containerTable = document.getElementById("containerTable");
 
-  const _cargarPrecios = () => {
-    carga();
-  };
+  const _getData = async () => {
+    const response = await http.get(BASE_URL);
+    $bodyTable.innerHTML = "";
 
-  async function carga() {
-    const responsePrecios = await http.get(BASE_URL);
-
-    for (let i = 1; i < 13; i++) {
-      var input = document.getElementById('precio_' + i);
-      for (let j = 0; j < 13; j++) {
-        if (responsePrecios[j].idPrecio == i) {
-          input.value = responsePrecios[j].precioOaxaca
-          break
-        }
+    let i = 0;
+    let x = 0;
+    while (x <= 12) {
+      if (response[i].idPrecio == x) {
+        const $row = _createRow(response[i], "idPrecio");
+        $bodyTable.appendChild($row);
+        x++;
+        i = -1;
       }
+      i++;
     }
-    for (let i = 0; i < 13; i++) {
-      var input2 = document.getElementById('precio2_' + i);
-      for (let j = 12; j >= 0; j--) {
-        if (responsePrecios[j].idPrecio == i - 1) {
-          input2.value = responsePrecios[j].precioVilla
-          break
-        }
-      }
+  };
+
+  const _actionButtonEditar = async (event) => {
+    const $btn = event.target;
+    const idPrecio = $btn.getAttribute("item-id");
+    const response = await http.get(`${BASE_URL}?idPrecio=${idPrecio}`);
+    formPrecio.setData(response[0], 'PUT');
+    formPrecio.setVisible(true);
+    precio.setVisible(false);
+  };
+
+  const _createRow = (item = {}, itemId = "") => {
+    const $row = document.createElement("tr");
+    for (const key in item) {
+      const value = item[key];
+      const $td = document.createElement("td");
+      $td.innerText = value;
+      $row.appendChild($td);
+
     }
-    /*for (let i = 1; i <= mapPreciosOaxaca.length; i++) {
-      var input = document.getElementById('precio_'+i);
-      input.value = mapPreciosOaxaca[i-1];
+    const $td = document.createElement("td");
+    const $td2 = document.createElement("td");
+    $td.appendChild(_createBtnAction(item[itemId], "Editar", _actionButtonEditar));
+    $row.appendChild($td);
 
-      var input2 = document.getElementById('precio2_'+i);
-      input2.value = mapPreciosVilla[i-1];
-    }*/
-  }
-
-  const _configureBtnGuardar = () => {
-    const $btnGuardar = document.getElementById("btnGuardar");
-    $btnGuardar.addEventListener("click", () => {
-
-      for (let i = 1; i <= 12; i++) {
-        var formData = new FormData();
-        const $destino = document.getElementById("parada_" + i);
-        const $precioOaxaca = document.getElementById("precio_" + i);
-
-        formData.append("precioOaxaca", $precioOaxaca.value);
-
-        _update(i, formData);
-      }
-      for (let i = 1; i <= 12; i++) {
-        var formData = new FormData();
-        const $destino = document.getElementById("parada_" + i);
-        const $precioVilla = document.getElementById("precio2_" + i);
-
-        formData.append("precioVilla", $precioVilla.value);
-    
-        _update(i-1, formData);
-      }
-    });
+    return $row;
   };
 
-  const _update = async (itemId, formData) => {
-    await http.post({ url: `${BASE_URL}/update/${itemId}`, body: formData });
+  const _createBtnAction = (itemId = 0, labelBtn = "", _actionFuntion = () => { }) => {
+    const $btn = document.createElement("button");
+    $btn.innerText = labelBtn;
+    $btn.className += "minusculas waves-effect waves-light btn green";
+    $btn.setAttribute("item-id", itemId);
+    $btn.addEventListener("click", _actionFuntion);
+    return $btn;
   };
 
+  const _setVisible = (visible = true) => {
+    if (visible) {
+      $containerTable.classList.remove("hide");
+    } else {
+      $containerTable.classList.add("hide");
+    }
+  };
 
-  const _init = () => {
-    _cargarPrecios();
-    _configureBtnGuardar();
+  const _initElements = () => {
+    _getData();
   };
 
   return {
-    init: _init,
+    init: () => {
+      _initElements();
+    },
+    setVisible: _setVisible,
+    getData: _getData
   };
 })();
 
-formPrecio.init();
+precio.init();

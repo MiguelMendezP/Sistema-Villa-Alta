@@ -1,32 +1,6 @@
-<div id="containerPago" class="card mx-basic my-basic hide">
+<div id="containerPago" class="hide">
     <div class="dividirPantalla">
-        <div>
-            <h5>Datos de pasajeros</h5>
-            <form id="formDatosPasajero" action="" method="post">
-                <div id="formContainer01" class="containerPasajero">
-                    <div id="container-div01" class="container-div">
 
-                        <div id="container-valores01" class="container-valores">
-
-                            <p id="pasajero01">Pasajero 01</p>
-                            <p id="asiento01">Asiento: </p>
-                        </div>
-
-                        <div id="container-datos01" class="container-datos">
-                            <div id="container-nombre01" class="container-nombre">
-                                <p id="nombre01">Nombre(s)</p>
-                                <input id="inputNombre01" placeholder="Nombre del pasajero" type="text">
-                            </div>
-                            <div id="container-apellido01" class="container-apellido">
-                                <p id="apellido01">Apellido(s)</p>
-                                <input id="inputApellido01" placeholder="Apellidos del pasajero" type="text">
-                            </div>
-                        </div>
-                    </div>
-                    <p></p>
-                </div>
-            </form>
-        </div>
         <div class="datosViaje-pago">
             <div class="datosAsientos">
                 <div class="datosViaje">
@@ -61,9 +35,37 @@
                     </div>
                 </div>
                 <div class="pago">
-                    <button id="btnFinalizarPago">Proceder a Pagar</button>
+                    <button id="btnFinalizarPago">Finalizar Compra</button>
                 </div>
             </div>
+        </div>
+
+        <div class="datosPasajero-pago">
+            <h5>Datos de pasajeros</h5>
+            <form id="formDatosPasajero" action="" method="post">
+                <div id="formContainer01" class="containerPasajero">
+                    <div id="container-div01" class="container-div">
+
+                        <div id="container-valores01" class="container-valores">
+
+                            <p id="pasajero01">Pasajero 01</p>
+                            <p id="asiento01">Asiento: </p>
+                        </div>
+
+                        <div id="container-datos01" class="container-datos">
+                            <div id="container-nombre01" class="container-nombre">
+                                <p id="nombre01">Nombre(s)*</p>
+                                <input id="inputNombre01" placeholder="Nombre del pasajero" type="text">
+                            </div>
+                            <div id="container-apellido01" class="container-apellido">
+                                <p id="apellido01">Apellido(s)*</p>
+                                <input id="inputApellido01" placeholder="Apellidos del pasajero" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
+                </div>
+            </form>
         </div>
     </div>
 </div>

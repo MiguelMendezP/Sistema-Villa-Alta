@@ -32,9 +32,11 @@ const boleto = (() => {
         for (let i = 0; i < responseBoleto.length; i++) {
             if (responseBoleto[i].idUsuario == idUsuario && responsePasajero[i].idUsuario == idUsuario) {
                 var pasajero = responsePasajero[i].nombre + " " + responsePasajero[i].apellido;
-
                 while (j < responseSalida.length) {
+                    console.log(responseBoleto[i].idSalida);
+                    console.log(responseSalida[j].idSalida);
                     if (responseBoleto[i].idSalida == responseSalida[j].idSalida) {
+                        
                         var idBoleto = responseBoleto[i].idBoleto;
                         if(responseBoleto[i].noAsiento>=10){
                             var asiento = responseBoleto[i].noAsiento;
@@ -47,7 +49,6 @@ const boleto = (() => {
                         var fecha = responseSalida[j].fecha
                         var hora = responseSalida[j].hora;
                         var precio = responseSalida[j].precio;
-
                         crearRecuadro(idBoleto, terminalO, terminalD, pasajero, fecha, hora, precio, asiento);
                         j = responseSalida.length;
                     }

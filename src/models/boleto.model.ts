@@ -20,6 +20,10 @@ BoletoModel.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        idPrecio: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         noAsiento: {
             type: DataTypes.INTEGER,
             allowNull: false,

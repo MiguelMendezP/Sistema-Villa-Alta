@@ -18,10 +18,6 @@ PasajeroModel.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        telefono:{
-            type: DataTypes.STRING,
-            allowNull: false
-        }
     },
     {
         sequelize,

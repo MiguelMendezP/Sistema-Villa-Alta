@@ -5,8 +5,13 @@ const boleto = (() => {
     const BASE_URL_USUARIO = "/admin/usuario";
     const BASE_URL_BOLETO = "/mis-boletos";
     const BASE_URL_SALIDA = "/admin/salida";
+    const BASE_URL_PRECIO = "/admin/precio";
 
-    function setData(idBoleto, nombre, origen, destino, num, fecha, hora, precio) {
+    async function setData(idBoleto, nombre, origen, destino, num, fecha, hora, precio) {
+        const responseBoleto = await http.get(BASE_URL_BOLETO);
+        const arrayBoleto = responseBoleto.find((arrayBoleto) => arrayBoleto.idBoleto == idBoleto);
+        console.log(arrayBoleto);
+
         document.getElementById("nombre").innerHTML = nombre;
         document.getElementById("origen").innerHTML = origen;
         document.getElementById("destino").innerHTML = destino;
@@ -14,7 +19,9 @@ const boleto = (() => {
         document.getElementById("fecha").innerHTML = fecha;
         document.getElementById("hora").innerHTML = hora;
         document.getElementById("numFolio").innerHTML = idBoleto;
-        document.getElementById("precio").innerHTML = "$"+precio;
+        document.getElementById("numPasajero").innerHTML = arrayBoleto.idUsuario;
+        document.getElementById("numViaje").innerHTML = arrayBoleto.idSalida;
+        document.getElementById("precio").innerHTML = "$" + precio;
     }
 
     async function crearBoleto() {
@@ -22,7 +29,7 @@ const boleto = (() => {
         const responseBoleto = await http.get(BASE_URL_BOLETO);
         const responseSalida = await http.get(BASE_URL_SALIDA);
         const responsePasajero = await http.get(BASE_URL_PASAJERO);
-
+        const responsePrecio = await http.get(BASE_URL_PRECIO);
         let mapUsuario_Correos = responseUsuario.map((responseUsuario) => responseUsuario.correo);
 
         var posidUsuario = mapUsuario_Correos.indexOf($correoUsuario.innerHTML.trim());
@@ -30,26 +37,33 @@ const boleto = (() => {
 
         var j = 0;
         for (let i = 0; i < responseBoleto.length; i++) {
+            const precio = responsePrecio.find((precio) => precio.idPrecio === responseBoleto[i].idPrecio);
+
             if (responseBoleto[i].idUsuario == idUsuario && responsePasajero[i].idUsuario == idUsuario) {
-                var pasajero = responsePasajero[i].nombre + " " + responsePasajero[i].apellido;
+                var pasajero = responsePasajero[i].nombre;
                 while (j < responseSalida.length) {
-                    console.log(responseBoleto[i].idSalida);
-                    console.log(responseSalida[j].idSalida);
                     if (responseBoleto[i].idSalida == responseSalida[j].idSalida) {
-                        
+
                         var idBoleto = responseBoleto[i].idBoleto;
-                        if(responseBoleto[i].noAsiento>=10){
+                        if (responseBoleto[i].noAsiento >= 10) {
                             var asiento = responseBoleto[i].noAsiento;
-                        }else{
-                            var asiento = "0"+responseBoleto[i].noAsiento;
+                        } else {
+                            var asiento = "0" + responseBoleto[i].noAsiento;
                         }
+
                         var terminalO = responseSalida[j].terminal_salida;
-                        var terminalD = responseSalida[j].terminal_destino;
-                        var fecha = responseSalida[j].fecha +" a las "+responseSalida[j].hora;
+                        var terminalD = precio.destino;
+                        var fecha = responseSalida[j].fecha + " a las " + responseSalida[j].hora;
                         var fecha = responseSalida[j].fecha
                         var hora = responseSalida[j].hora;
-                        var precio = responseSalida[j].precio;
-                        crearRecuadro(idBoleto, terminalO, terminalD, pasajero, fecha, hora, precio, asiento);
+                        if(terminalO == "Terminal Oaxaca"){
+                            var precioDestino = precio.precioOaxaca;
+                        }else{
+                            var precioDestino = precio.precioVilla;
+                        }
+                        
+
+                        crearRecuadro(idBoleto, terminalO, terminalD, pasajero, fecha, hora, precioDestino, asiento);
                         j = responseSalida.length;
                     }
                     j++;
@@ -63,13 +77,13 @@ const boleto = (() => {
         const clickedElement = event.target;
         if (clickedElement.matches('.btn')) {
             var idBoleto = (event.target.id).substring(5, (event.target.id).length);
-            var nombre = document.getElementById("pasajero--"+idBoleto).innerHTML;
-            var origen = document.getElementById("terminalO--"+idBoleto).innerHTML;
-            var destino = document.getElementById("terminalD--"+idBoleto).innerHTML;
-            var num = document.getElementById("numBol--"+idBoleto).innerHTML;
-            var fecha = document.getElementById("fecha--"+idBoleto).innerHTML;
-            var hora = document.getElementById("hora--"+idBoleto).innerHTML;
-            var precio = document.getElementById("precio--"+idBoleto).innerHTML;
+            var nombre = document.getElementById("pasajero--" + idBoleto).innerHTML;
+            var origen = document.getElementById("terminalO--" + idBoleto).innerHTML;
+            var destino = document.getElementById("terminalD--" + idBoleto).innerHTML;
+            var num = document.getElementById("numBol--" + idBoleto).innerHTML;
+            var fecha = document.getElementById("fecha--" + idBoleto).innerHTML;
+            var hora = document.getElementById("hora--" + idBoleto).innerHTML;
+            var precio = document.getElementById("precio--" + idBoleto).innerHTML;
 
             setData(idBoleto, nombre, origen, destino, num, fecha, hora, precio)
             boleto.setVisible(false);
@@ -86,7 +100,7 @@ const boleto = (() => {
         $donde.appendChild(elem);
     }
 
-    function crearRecuadro(id, terminalO, terminalD, pasajero, fecha, hora, precio,asiento) {
+    function crearRecuadro(id, terminalO, terminalD, pasajero, fecha, hora, precio, asiento) {
         crearElemento("div", "c1--" + id, "c1", "form", null);
         crearElemento("div", "c2--" + id, "c2", "c1--" + id, null);
         crearElemento("p", null, "numBolText", "c2--" + id, "Asiento");
@@ -108,7 +122,7 @@ const boleto = (() => {
         crearElemento("p", "fecha--" + id, null, "divFlex2--" + id, fecha);
         crearElemento("div", "divFlex3--" + id, "divFlex", "c22--" + id, null);
         crearElemento("p", null, null, "divFlex3--" + id, "Hora: a las ");
-        crearElemento("p", "hora--" + id, null, "divFlex3--" + id, hora + " horas");
+        crearElemento("p", "hora--" + id, null, "divFlex3--" + id, hora);
         crearElemento("div", "divFlex4--" + id, "divFlex", "c22--" + id, null);
         crearElemento("p", null, null, "divFlex4--" + id, "Precio:  $");
         crearElemento("p", "precio--" + id, null, "divFlex4--" + id, precio + ".00");
@@ -121,9 +135,9 @@ const boleto = (() => {
     const _setVisible = (visible = true) => {
         if (visible) {
             $formContainer01.classList.remove("hide");
-            
+
         } else {
-           
+
             $formContainer01.classList.add("hide");
         }
     };

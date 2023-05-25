@@ -33,6 +33,7 @@ const formUsuario = (() => {
       const method = $form.getAttribute("method");
       const formData = new FormData($form);
       formData.append("administrador",true);
+      
       if (method.toUpperCase() === "POST") {
         _create(formData);
       }

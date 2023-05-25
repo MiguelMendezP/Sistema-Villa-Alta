@@ -74,8 +74,27 @@ span{
   border-radius: 10px;
     box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
 }
+.alerta{
+  background: #f3f3f3;
+  width: 40%;
+  height: 30%;
+  text-align: center;
+  padding: 33px;
+  border-radius: 10px;
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  display: none;
+  border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+}
 
 #cerrar{
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+#cerrarAlerta{
   position: absolute;
   right: 3px;
   top: 3px;

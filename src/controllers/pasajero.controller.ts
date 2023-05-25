@@ -8,7 +8,7 @@ export async function indexViewPasajero(req: Request, res: Response) {
 export async function getPasajero(req: Request, res: Response) {
     const { query: where } = req
     const pasajero = await PasajeroModel.findAll({
-        attributes: ["idUsuario","nombre","apellido"],
+        attributes: ["idUsuario","nombre"],
         raw: true,
         where
     });

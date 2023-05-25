@@ -67,7 +67,6 @@ const pago = (() => {
             var formData = new FormData();
             formData.append("idUsuario", idUsuario);
             formData.append("nombre", document.getElementById("inputNombre0" + (i + 1)).value);
-            formData.append("apellido", document.getElementById("inputApellido0" + (i + 1)).value);
             await http.post({ url: BASE_URL_PASAJERO, body: formData });
         }
     }
@@ -88,14 +87,9 @@ const pago = (() => {
         crearElemento("p", "pasajero" + id, null, "container-valores" + id, "Pasajero " + id)
         crearElemento("p", "asiento" + id, null, "container-valores" + id, "Asiento: " + asiento)
         crearElemento("div", "container-datos" + id, "container-datos", "container-div" + id, null)
-        crearElemento("div", "container-nombre" + id, "container-nombre", "container-datos" + id, null)
-        crearElemento("p", "nombre" + id, null, "container-nombre" + id, "Nombre(s)")
-        crearElemento("input", "inputNombre" + id, null, "container-nombre" + id, "")
-        crearElemento("div", "container-apellido" + id, "container-apellido", "container-datos" + id, null)
-        crearElemento("p", "apellido" + id, null, "container-apellido" + id, "Apellido(s)")
-        crearElemento("input", "inputApellido" + id, null, "container-apellido" + id, "")
+        crearElemento("p", "nombre" + id, null, "container-datos" + id, "Nombre(s)")
+        crearElemento("input", "inputNombre" + id, null, "container-datos" + id, "")
         crearElemento("p", null, null, "formContainer01", null)
-
     }
 
     const _llenarDatosViaje = () => {

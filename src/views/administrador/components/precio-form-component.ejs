@@ -1,25 +1,21 @@
 <div id="containerForm" class="card mx-basic my-basic hide">
     <form id="formPrecio" action="/admin/salida" method="post" enctype="multipart/form-data">
         <div class="row">
+            <div class="col s2"></div>
             <div class="input-field col s3">
                 <label>Punto de Parada</label>
             </div>
             <div class="input-field col s3">
-                <label>Precio desde Oaxaca</label>
-            </div>
-            <div class="input-field col s3">
-                <label>Precio desde Villa</label>
+                <label id="precioDesde">Precio desde: </label>
             </div>
         </div>
         <div class="row">   
+            <div class="col s2"></div>
             <div class="input-field col s3">
                 <input id="parada" type="text"></input>
             </div>   
             <div class="input-field col s3">
-                <input id="precioOaxaca" type="text"></input>
-            </div>
-            <div class="input-field col s3">
-                <input id="precioVilla" type="text"></input>
+                <input id="precioParada" type="text"></input>
             </div>
         </div>
     </form>

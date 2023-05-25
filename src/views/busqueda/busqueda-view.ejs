@@ -3,22 +3,19 @@
 
 <head>
     <%- include("../comunes/usuario/headers-component") -%>
+        <link rel="stylesheet" href="/assets/css/busqueda.css">
 </head>
 
 <body>
 
     <%- include("../comunes/usuario/sidenav-component") -%>
         <main>
-            <h4 class="my-basic">¿A dónde quieres ir?</h4>
-            
-                <%- include("../busqueda/components/form-busqueda-components") -%>
-          
-            <!--img width="100" height="100" src="/api/v1/file?filePath= " alt="" srcset=""-->
-
+            <img class="imagenFondo" src="assets/img/busFondo.png">
+            <%- include("../busqueda/components/form-busqueda-components") -%>
         </main>
 
-    <%- include("../comunes/usuario/footer-component") -%>
-    <script src="/assets/js/busqueda/busqueda.js"></script>
+        <%- include("../comunes/usuario/footer-component") -%>
+            <script src="/assets/js/busqueda/busqueda.js"></script>
 </body>
 
 </html>

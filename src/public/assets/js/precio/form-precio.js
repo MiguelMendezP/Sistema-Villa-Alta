@@ -3,14 +3,19 @@ const formPrecio = (() => {
   const $form = document.getElementById("formPrecio");
   const BASE_URL = "/admin/precio";
 
-  const _setData = (item = {}, typeRender = "POST") => {
+  const _setData = (item = {}, typeRender = "POST", idParada) => {
     const $parada = document.getElementById("parada");
-    const $precioOaxaca = document.getElementById("precioOaxaca");
-    const $precioVilla = document.getElementById("precioVilla");
+    const $precioParada = document.getElementById("precioParada");
+    const $precioDesde = document.getElementById("precioDesde");
     const { idPrecio, destino, precioOaxaca, precioVilla } = item;
     $parada.value = destino;
-    $precioOaxaca.value = precioOaxaca;
-    $precioVilla.value = precioVilla;
+    if(idParada == "precioOaxaca"){
+      $precioParada.value = precioOaxaca;
+      $precioDesde.innerHTML = "Precio desde: Oaxaca"
+    } else {
+      $precioParada.value = precioVilla;
+      $precioDesde.innerHTML = "Precio desde: Villa Alta"
+    }
     $form.setAttribute("method", typeRender);
     $form.setAttribute("item-id", idPrecio);
     M.updateTextFields();
@@ -31,19 +36,29 @@ const formPrecio = (() => {
 
       var formData = new FormData();
       const $parada = document.getElementById("parada");
-      const $precioOaxaca = document.getElementById("precioOaxaca");
-      const $precioVilla = document.getElementById("precioVilla");
-      //Agregar un bucle que cree muchas fechas
+      const $precioParada = document.getElementById("precioParada");
       formData.append("destino", $parada.value);
-      formData.append("precioOaxaca", $precioOaxaca.value);
-      formData.append("precioVilla", $precioVilla.value);
-      _create(formData);
+      lugarOrigen = document.getElementById("precioDesde").innerHTML;
+      if(lugarOrigen.includes("Oaxaca")){
+        formData.append("precioOaxaca", $precioParada.value);
+      } else {
+        formData.append("precioVilla", $precioParada.value);
+      }
+      
+
+      const method = $form.getAttribute("method");
+      if (method.toUpperCase() === "POST") {
+        _create(formData);
+      }
+
+      if (method === "PUT") {
+        _update(formData);
+      }
     });
   };
 
   const _create = async (formData) => {
-    const itemId = $form.getAttribute("item-id");
-    await http.post({ url: `${BASE_URL}/update/${itemId}`, body: formData });
+    await http.post({ url: BASE_URL, body: formData });
     formPrecio.setVisible(false);
     precio.setVisible(true);
     precio.getData();

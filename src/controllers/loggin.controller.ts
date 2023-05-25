@@ -52,6 +52,8 @@ class LoginController {
         }
     }
 
+
+
     public register(req: Request, res: Response): void {
         res.render("login/register-view", {
             title: 'Register'
@@ -59,7 +61,7 @@ class LoginController {
     }
     //Registrarse 
     public registrarse(req: Request, res: Response) {
-        res.send("Recivido")
+        res.send("Recibido")
     }
 }
 export const loginController = new LoginController();

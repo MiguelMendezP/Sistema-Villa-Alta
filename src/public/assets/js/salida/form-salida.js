@@ -58,8 +58,6 @@ const formSalida = (() => {
     var yyyy = fechaActual.getFullYear();
     var fechaMinima = yyyy + '-' + mm + '-' + dd;
     document.getElementById("fechaInicial").setAttribute("min", fechaMinima);
-    document.getElementById("fechaFinal").setAttribute("min", fechaMinima);
-
   }
 
   const _configureBtnCancelar = () => {
@@ -74,17 +72,38 @@ const formSalida = (() => {
     const $btnGuardar = document.getElementById("btnGuardar");
     $btnGuardar.addEventListener("click", () => {
 
-      var formData = new FormData();
       const $hora = document.getElementById("hora");
       const $fecha = document.getElementById("fechaInicial");
+      const $cantidadRepetir = document.getElementById("cantidadRepetir");
       const $terminal_salida = document.getElementById("ciudadOrigen");
       const $terminal_destino = document.getElementById("ciudadDestino");
-      //Agregar un bucle que cree muchas fechas
-      formData.append("hora", $hora.value);
-      formData.append("fecha", $fecha.value);
-      formData.append("terminal_salida", $terminal_salida.options[$terminal_salida.selectedIndex].text);
-      formData.append("terminal_destino", $terminal_destino.options[$terminal_destino.selectedIndex].text);
-      _create(formData);
+
+      const fechaInicial = new Date($fecha.value);
+      const numeroDeDias = $cantidadRepetir.value;
+      const fechas = [];
+
+      for (let i = 0; i < numeroDeDias; i++) {
+        const fecha = new Date(fechaInicial);
+        fecha.setDate(fechaInicial.getDate() + i);
+        fechas.push(fecha.toISOString().slice(0, 10));
+      }
+
+      const method = $form.getAttribute("method");
+      if (method.toUpperCase() === "POST") {
+        for (let i = 0; i < fechas.length; i++) {
+          var formData = new FormData();
+          formData.append("hora", $hora.value);
+          formData.append("fecha", fechas[i]);
+          formData.append("terminal_salida", $terminal_salida.options[$terminal_salida.selectedIndex].text);
+          formData.append("terminal_destino", $terminal_destino.options[$terminal_destino.selectedIndex].text);
+          console.log(formData);
+          _create(formData);
+        }
+      }
+
+      if (method === "PUT") {
+        //_update(formData);
+      }
 
     });
   };
